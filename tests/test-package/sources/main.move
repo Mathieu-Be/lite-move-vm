@@ -12,6 +12,10 @@ public fun value(counter: &Counter): u64 {
     counter.value
 }
 
+public fun eight(): u64 {
+    8
+}
+
 public fun ping(): std::string::String {
     b"pong".to_string()
 }

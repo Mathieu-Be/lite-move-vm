@@ -4,3 +4,17 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+move-binary-format = { version = "0.0.3", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+move-core-types = { version = "0.0.4", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+move-package = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+move-unit-test = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+move-vm-runtime = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+move-vm-test-utils = { git = "https://github.com/Mathieu-Be/sui-fork.git", version = "0.1.0" }
+move-vm-types = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+sui-move = { version = "1.41.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+sui-move-build = { version = "1.41.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+sui-move-natives-latest = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+sui-protocol-config = { version = "0.1.0", git = "https://github.com/Mathieu-Be/sui-fork.git" }
+
+[dev-dependencies]
+rstest = "0.24.0"
