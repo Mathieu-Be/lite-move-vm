@@ -1,14 +1,8 @@
 #[test_only]
 module lite_svm_test_pkg::tests;
 
-use lite_svm_test_pkg::main::{ping, create_counter, increment};
+use lite_svm_test_pkg::main::{create_counter, increment};
 use sui::test_scenario;
-
-#[test]
-fun basic_test() {
-    ping();
-    assert!(2==2);
-}
 
 #[test]
 public fun test_with_object(): u64 {

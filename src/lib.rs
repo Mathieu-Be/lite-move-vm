@@ -1,10 +1,12 @@
 use std::path::Path;
 use std::sync::LazyLock;
 
-use move_binary_format::CompiledModule;
+use move_binary_format::{errors::VMError, CompiledModule};
 use move_core_types::{
-    account_address::AccountAddress, identifier::IdentStr, language_storage::ModuleId,
-    runtime_value::serialize_values,
+    account_address::AccountAddress,
+    identifier::IdentStr,
+    language_storage::ModuleId,
+    runtime_value::{serialize_values, MoveValue},
 };
 use move_package::{compilation::build_plan::BuildPlan, BuildConfig};
 use move_unit_test::{
@@ -32,7 +34,15 @@ impl LiteMVM<'_, '_> {
         Self { session }
     }
 
-    pub fn call(&mut self, module: &str, function: &str) {
+    pub fn call<'a, I>(
+        &mut self,
+        module: &str,
+        function: &str,
+        args: I,
+    ) -> Result<Vec<Vec<u8>>, VMError>
+    where
+        I: IntoIterator<Item = &'a MoveValue>,
+    {
         let serialized_return_values_result = self.session.execute_function_bypass_visibility(
             &ModuleId::new(
                 AccountAddress::from_hex_literal("0x0").unwrap(),
@@ -40,11 +50,11 @@ impl LiteMVM<'_, '_> {
             ),
             IdentStr::new(function).unwrap(),
             vec![],
-            serialize_values(vec![]),
+            serialize_values(args),
             &mut UnmeteredGasMeter,
         );
 
-        let return_result: Result<Vec<Vec<u8>>, move_binary_format::errors::VMError> =
+        let return_result: Result<Vec<Vec<u8>>, VMError> =
             serialized_return_values_result.map(|res| {
                 res.return_values
                     .into_iter()
@@ -52,7 +62,7 @@ impl LiteMVM<'_, '_> {
                     .collect()
             });
 
-        println!("{:?}", return_result);
+        return_result
     }
 }
 
