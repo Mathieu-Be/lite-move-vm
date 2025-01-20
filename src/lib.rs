@@ -14,7 +14,7 @@ use move_unit_test::{
     test_runner::setup_test_storage,
 };
 use move_vm_runtime::{move_vm::MoveVM, session::Session};
-use move_vm_test_utils::InMemoryStorage;
+pub use move_vm_test_utils::InMemoryStorage;
 use move_vm_types::gas::UnmeteredGasMeter;
 use sui_move::unit_test::new_testing_object_and_natives_cost_runtime;
 use sui_move_build::set_sui_flavor;
