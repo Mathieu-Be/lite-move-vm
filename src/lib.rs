@@ -3,10 +3,8 @@ use std::sync::LazyLock;
 
 use move_binary_format::{errors::VMError, CompiledModule};
 use move_core_types::{
-    account_address::AccountAddress,
-    identifier::IdentStr,
-    language_storage::ModuleId,
-    runtime_value::{serialize_values, MoveValue},
+    account_address::AccountAddress, identifier::IdentStr, language_storage::ModuleId,
+    runtime_value::serialize_values,
 };
 use move_package::{compilation::build_plan::BuildPlan, BuildConfig};
 use move_unit_test::{
@@ -14,11 +12,13 @@ use move_unit_test::{
     test_runner::setup_test_storage,
 };
 use move_vm_runtime::{move_vm::MoveVM, session::Session};
-pub use move_vm_test_utils::InMemoryStorage;
 use move_vm_types::gas::UnmeteredGasMeter;
 use sui_move::unit_test::new_testing_object_and_natives_cost_runtime;
 use sui_move_build::set_sui_flavor;
 use sui_protocol_config::ProtocolConfig;
+
+pub use move_core_types::runtime_value::MoveValue;
+pub use move_vm_test_utils::InMemoryStorage;
 
 static MOVE_VM: LazyLock<MoveVM> = LazyLock::new(|| create_vm());
 
